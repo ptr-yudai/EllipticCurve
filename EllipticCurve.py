@@ -37,27 +37,27 @@ class FiniteField:
         while s & 1 == 0:
             s >>= 1
             e += 1
-            # L(n/p) = -1なるnを見つける
-            n = 2
-            while self.legendreSymbol(n, self.p) != -1:
-                n += 1
-            # 根を計算する
-            x = pow(a, (s + 1)/2, self.p)
-            b = pow(a, s, self.p)
-            g = pow(n, s, self.p)
-            while True:
-                t, m = b, 0
-                for m in xrange(e):
-                    if t == 1:
-                        break
-                    t = pow(t, 2, self.p)
-                if m == 0:
-                    return x
-                gs = pow(g, 2 ** (r - m - 1), self.p)
-                g = (gs ** 2) % self.p
-                x = (x * gs) % self.p
-                b = (b * g) % self.p
-                e = m
+        # L(n/p) = -1なるnを見つける
+        n = 2
+        while self.legendreSymbol(n, self.p) != -1:
+            n += 1
+        # 根を計算する
+        x = pow(a, (s + 1)/2, self.p)
+        b = pow(a, s, self.p)
+        g = pow(n, s, self.p)
+        while True:
+            t, m = b, 0
+            for m in xrange(e):
+                if t == 1:
+                    break
+                t = pow(t, 2, self.p)
+            if m == 0:
+                return x
+            gs = pow(g, 2 ** (r - m - 1), self.p)
+            g = (gs ** 2) % self.p
+            x = (x * gs) % self.p
+            b = (b * g) % self.p
+            e = m
             
 class Point:
     """ 点 """
