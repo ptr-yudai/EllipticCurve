@@ -19,12 +19,12 @@ class FiniteField:
             raise Exception("逆数が存在しません")
         return x % self.p
 
-    def legendreSymbol(self, a, p):
-        ls = pow(a, (p-1) / 2, p)
-        return -1 if ls == p-1 else ls
+    def legendreSymbol(self, a):
+        ls = pow(a, (self.p-1) / 2, self.p)
+        return -1 if ls == self.p-1 else ls
 
     def modSqrt(self, a):
-        L = self.legendreSymbol(a, self.p)
+        L = self.legendreSymbol(a)
         if L == -1:
             raise Exception("根が存在しません")
         elif L == 0:
@@ -39,7 +39,7 @@ class FiniteField:
             e += 1
         # L(n/p) = -1なるnを見つける
         n = 2
-        while self.legendreSymbol(n, self.p) != -1:
+        while self.legendreSymbol(n) != -1:
             n += 1
         # 根を計算する
         x = pow(a, (s + 1)/2, self.p)
