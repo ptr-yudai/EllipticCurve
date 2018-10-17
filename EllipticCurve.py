@@ -82,12 +82,12 @@ class Point:
         # 無限遠点以外
         if self.F == Q.F and self.x == Q.x and self.y == Q.y:
             # R = P + P
-            m = (3*Q.x*Q.x + EC.A) * F.modInv(2*Q.y) % F.p
+            m = (3*Q.x*Q.x + self.EC.A) * self.F.modInv(2*Q.y) % self.F.p
         else:
             # R = P + Q
-            m = (Q.y - self.y) * F.modInv(Q.x - self.x) % F.p
-        x = (m*m - self.x - Q.x) % F.p
-        y = (m*(self.x - x) - self.y) % F.p
+            m = (Q.y - self.y) * self.F.modInv(Q.x - self.x) % self.F.p
+        x = (m*m - self.x - Q.x) % self.F.p
+        y = (m*(self.x - x) - self.y) % self.F.p
         return Point(self.EC, x, y)
 
     def __mul__(self, n):
