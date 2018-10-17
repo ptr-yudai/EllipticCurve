@@ -72,7 +72,7 @@ class Point:
         if not isinstance(Q, Point):
             raise("無効な型との加算です")
         # 異なる楕円曲線
-        if Q.EC != self.EC:
+        if Q.EC.F.p != self.EC.F.p:
             raise("異なる楕円曲線上の点どうしの加算です")
         # 無限遠点の場合
         if Q.x == -1:
@@ -80,9 +80,13 @@ class Point:
         if self.x == -1:
             return Q
         # 無限遠点以外
-        if self.F == Q.F and self.x == Q.x and self.y == Q.y:
-            # R = P + P
-            m = (3*Q.x*Q.x + self.EC.A) * self.F.modInv(2*Q.y) % self.F.p
+        if self.x == Q.x:
+            if self.y == Q.y:
+                # R = P + P
+                m = (3*Q.x*Q.x + self.EC.A) * self.F.modInv(2*Q.y) % self.F.p
+            else:
+                # R = P + (-P) = O
+                return self.EC.O
         else:
             # R = P + Q
             m = (Q.y - self.y) * self.F.modInv(Q.x - self.x) % self.F.p
