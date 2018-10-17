@@ -53,7 +53,7 @@ class FiniteField:
                 t = pow(t, 2, self.p)
             if m == 0:
                 return x
-            gs = pow(g, 2 ** (r - m - 1), self.p)
+            gs = pow(g, 2 ** (e - m - 1), self.p)
             g = (gs ** 2) % self.p
             x = (x * gs) % self.p
             b = (b * g) % self.p
