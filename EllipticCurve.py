@@ -127,7 +127,7 @@ class EllipticCurve:
         return y
 
     def __str__(self):
-        return "EC: y^2 = x^2 + {A}x + {B} mod {p}".format(
+        return "EC: y^2 = x^3 + {A}x + {B} mod {p}".format(
             A=self.A, B=self.B, p=self.F.p
         )
 
